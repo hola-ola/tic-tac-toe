@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
+import SquareComponent from "@/components/Square-component.vue";
 
 const winner = ref<string | null>(null)
 const isTie = ref<boolean>(false)
@@ -111,19 +112,18 @@ const cleanBoard = function () {
   <div class="board">
     <div v-for="(row, rowIndex) in board">
       <div v-for="(cell, cellIndex) in row" class="cell">
-        <Square-component
+        <SquareComponent
             :key="board[rowIndex][cellIndex]"
             :row-index="rowIndex"
             :cell-index="cellIndex"
             :sign="board[rowIndex][cellIndex]"
             :disabled="gameOver || board[rowIndex][cellIndex] !== ``"
-            @click="makeMove(rowIndex, cellIndex, currentPlayer)"
-        />
+            @click="makeMove(rowIndex, cellIndex, currentPlayer)" />
       </div>
     </div>
   </div>
 
-  <button class="button" @click="resetGame">{{ gameOver ? `Play again!` : `Start over` }}</button>
+  <button class="button" @click="resetGame()">{{ gameOver ? `Play again!` : `Start over` }}</button>
 </template>
 
 <style lang="scss" scoped>
